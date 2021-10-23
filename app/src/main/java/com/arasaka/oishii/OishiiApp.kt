@@ -1,4 +1,8 @@
 package com.arasaka.oishii
 
-class OishiiApp {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class OishiiApp: Application() {
 }

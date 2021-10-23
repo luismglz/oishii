@@ -1,4 +1,6 @@
 package com.arasaka.oishii.presentation
 
-class BaseViewState {
+abstract class BaseViewState {
+    object ShowLoading: BaseViewState()
+    object HideLoading: BaseViewState()
 }

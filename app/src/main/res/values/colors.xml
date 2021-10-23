@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_oishii">#F6F6F6</color>
+    <color name="gray_oishii">#D7D7D7</color>
+    <color name="yellow_oishii">#FFC529</color>
+    <color name="salmon_oishii">#FE724D </color>
+    <color name="blue_gray_oishii">#262D2F</color>
+    <color name="gray_transparent">#8B000000</color>
 </resources>

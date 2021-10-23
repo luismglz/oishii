@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mealFragment">
+
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="com.arasaka.oishii.presentation.meals.MealFragment"
+        android:label="meal_fragment"
+        tools:layout="@layout/meal_fragment">
+        <action
+            android:id="@+id/action_mealFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealDetailFragment"
+        android:name="com.arasaka.oishii.presentation.mealdetail.MealDetailFragment"
+        android:label="meal_detail_fragment"
+        tools:layout="@layout/meal_detail_fragment">
+
+        <argument
+            android:name="meal"
+            app:argType="com.arasaka.oishii.domain.model.Meal" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/randomFragment"
+        android:name="com.arasaka.oishii.presentation.mealsrandom.RandomFragment"
+        android:label="random_fragment"
+        tools:layout="@layout/random_fragment">
+        <action
+            android:id="@+id/action_randomFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.arasaka.oishii.presentation.mealscategories.CategoriesFragment"
+        android:label="categories_fragment"
+        tools:layout="@layout/categories_fragment">
+        <action
+            android:id="@+id/action_categoriesFragment_to_mealFragment2"
+            app:destination="@id/mealFragment" />
+    </fragment>
+
+</navigation>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Oishii</string>
+    <string name="text_meals">Meals</string>
+    <string name="text_favorites">Favorites</string>
+    <string name="text_account">Account</string>
+    <string name="failure_response">Oops\nError making call with server</string>
+    <string name="text_query_hint">Search for food... 🍔</string>
+    <string name="no_information">Oops!\nThere is no information</string>
+    <string name="text_categories">Categories</string>
 </resources>
