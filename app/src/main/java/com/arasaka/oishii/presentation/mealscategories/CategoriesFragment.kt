@@ -16,7 +16,9 @@ import com.arasaka.oishii.R
 import com.arasaka.oishii.core.extension.failure
 import com.arasaka.oishii.core.extension.observe
 import com.arasaka.oishii.core.utils.LayoutType
+import com.arasaka.oishii.databinding.CategoriesFragmentBinding
 import com.arasaka.oishii.databinding.MealFragmentBinding
+import com.arasaka.oishii.domain.model.Category
 import com.arasaka.oishii.domain.model.Meal
 import com.arasaka.oishii.presentation.BaseFragment
 import com.arasaka.oishii.presentation.BaseViewState
@@ -35,8 +37,8 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 @AndroidEntryPoint
 class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
-    private lateinit var binding: MealFragmentBinding
-    private val adapter: MealAdapter by lazy { MealAdapter() }
+    private lateinit var binding: CategoriesFragmentBinding
+    private val adapter: CategoryAdapter by lazy { CategoryAdapter() }
     private var gridLayoutManager: GridLayoutManager?=null
     private val categoriesViewModel by viewModels<CategoriesViewModel>(); //view model injection
 
@@ -48,7 +50,7 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
             observe(state, ::onViewStateChanged)//Observe when livedata is modified
             failure(failure, ::handleFailure)
 
-            getMealsByCategories("")
+            doGetCategories("")
         }
     }
 
@@ -58,32 +60,32 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
         //val searchInput: SearchView = requireView().findViewById(R.id.svCocktail)
 
-        val btnChangeView: FloatingActionButton =
-            requireView().findViewById(R.id.floatingViewChange)
+        /*val btnChangeView: FloatingActionButton =
+            requireView().findViewById(R.id.floatingViewChange)*/
 
-        val rv: RecyclerView = requireView().findViewById(R.id.rcMeals)
+        val rv: RecyclerView = requireView().findViewById(R.id.rcMealsCategories)
 
     }
 
     override fun onViewStateChanged(state: BaseViewState?) {
         super.onViewStateChanged(state)
         when (state) {
-            is MealViewState.MealsReceived -> setUpAdapter(state.meals)
+            is CategoriesViewState.CategoriesReceived -> setUpAdapter(state.categories)
         }
     }
 
-    private fun setUpAdapter(meals: List<Meal>) {
-        binding.emptyView.isVisible = meals.isEmpty()
-        adapter.addData(meals);
+    private fun setUpAdapter(categories: List<Category>) {
+        binding.emptyView.isVisible = categories.isEmpty()
+        adapter.addData(categories);
         adapter.listener = {
-            navController.navigate(MealFragmentDirections.actionMealFragmentToMealDetailFragment(it))
+            navController.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToMealFragment2())
 
         }
 
 
-        binding.rcMeals.apply {
+        binding.rcMealsCategories.apply {
 
-            isVisible = meals.isNotEmpty()
+            isVisible = categories.isNotEmpty()
             adapter = this@CategoriesFragment.adapter
         }
 
@@ -91,32 +93,16 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
 
     override fun setBinding(view: View) {
-        binding = MealFragmentBinding.bind(view)
+        binding = CategoriesFragmentBinding.bind(view)
         binding.lifecycleOwner = this
-        binding.svMeal.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            //ENTER BUTTON IN KEYBOARD (submit search)
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                if (query != null) {
-                    binding.rcMeals.scrollToPosition(0)
-                    categoriesViewModel.getMealsByCategories(query.lowercase()?:"")
-                    //searchInput.clearFocus() ->Hide keyboard at type key...
-                }
-                return true
-            }
-        })
 
         binding.floatingViewChange.setOnClickListener{
             val newLayout = if(adapter.layoutType == LayoutType.LINEAR){
-                binding.rcMeals.layoutManager = GridLayoutManager(requireContext(),3);
+                binding.rcMealsCategories.layoutManager = GridLayoutManager(requireContext(),3);
                 LayoutType.GRID
 
             }else{
-                binding.rcMeals.layoutManager = LinearLayoutManager(requireContext());
+                binding.rcMealsCategories.layoutManager = LinearLayoutManager(requireContext());
                 LayoutType.LINEAR
             }
             adapter.changeView(newLayout)

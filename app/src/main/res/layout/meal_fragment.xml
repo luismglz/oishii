@@ -12,23 +12,24 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parentSearch"
             android:layout_width="350dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            app:layout_constraintBottom_toTopOf="@id/rcMeals"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rcMeals"
             tools:ignore="NotSibling">
 
-            <com.google.android.material.card.MaterialCardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            <com.google.android.material.card.MaterialCardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cardSearch"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="12dp"
                 android:focusable="true"
                 android:shadowColor="@color/stroke_color"
                 app:strokeColor="@color/stroke_color"
@@ -42,8 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:iconifiedByDefault="false"
-                    android:queryHint="@string/text_query_hint"
                     android:inputType="textFilter"
+                    android:queryHint="@string/text_query_hint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -65,9 +66,9 @@
                 android:id="@+id/rcMeals"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:visibility="gone"
                 android:clipToPadding="false"
                 android:paddingBottom="?attr/actionBarSize"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
                 tools:itemCount="10"
@@ -81,15 +82,15 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="65dp"
-            android:src="@drawable/ic_grid"
             android:backgroundTint="@color/yellow_oishii"
+            android:src="@drawable/ic_grid"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
         <include
             android:id="@+id/emptyView"
-            layout="@layout/empty_view"/>
+            layout="@layout/empty_view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

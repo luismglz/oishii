@@ -12,10 +12,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.cocktaildetail.CocktailDetailFragment">
+        tools:context=".presentation.mealdetail.MealDetailFragment">
 
         <ImageView
-            android:id="@+id/imgCocktail"
+            android:id="@+id/imgMeal"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:layout_margin="16dp"
@@ -30,8 +30,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_no_star"
-            app:layout_constraintEnd_toEndOf="@id/imgCocktail"
-            app:layout_constraintTop_toTopOf="@id/imgCocktail"/>
+            app:layout_constraintEnd_toEndOf="@id/imgMeal"
+            app:layout_constraintTop_toTopOf="@id/imgMeal"/>
 
         <TextView
             android:id="@+id/txvName"
@@ -40,8 +40,8 @@
             android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:text="@{meal.name}"
-            app:layout_constraintTop_toBottomOf="@id/imgCocktail"
-            app:layout_constraintStart_toStartOf="@id/imgCocktail"
+            app:layout_constraintTop_toBottomOf="@id/imgMeal"
+            app:layout_constraintStart_toStartOf="@id/imgMeal"
             tools:text="margarita"/>
 
         <TextView
@@ -52,16 +52,16 @@
             android:text="@{meal.category}"
             app:layout_constraintTop_toTopOf="@id/txvName"
             app:layout_constraintStart_toEndOf="@id/txvName"
-            app:layout_constraintEnd_toStartOf="@id/txvAlcoholic"
+            app:layout_constraintEnd_toStartOf="@id/txvArea"
             tools:text="category"/>
 
         <TextView
-            android:id="@+id/txvAlcoholic"
+            android:id="@+id/txvArea"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="@{meal.area}"
-            app:layout_constraintEnd_toEndOf="@+id/imgCocktail"
+            app:layout_constraintEnd_toEndOf="@+id/imgMeal"
             app:layout_constraintTop_toTopOf="@id/txvName"
             tools:text="alcoholic"/>
 
@@ -74,8 +74,8 @@
             android:text="@{meal.instructions}"
             tools:text="@tools:sample/lorem/random"
             app:layout_constraintTop_toBottomOf="@id/txvName"
-            app:layout_constraintStart_toStartOf="@id/imgCocktail"
-            app:layout_constraintEnd_toEndOf="@id/imgCocktail"
+            app:layout_constraintStart_toStartOf="@id/imgMeal"
+            app:layout_constraintEnd_toEndOf="@id/imgMeal"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 

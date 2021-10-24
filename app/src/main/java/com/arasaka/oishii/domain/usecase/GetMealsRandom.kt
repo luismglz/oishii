@@ -7,5 +7,6 @@ import javax.inject.Inject
 
 class GetMealsRandom @Inject constructor(private val mealRepository: MealRepository) :
     UseCase<MealsResponse, String>()  {
-    override suspend fun run(params: String ) = mealRepository.getMealsRandom(params);
+
+    override suspend fun run(params: String ) = mealRepository.getMealsByName(params);
 }

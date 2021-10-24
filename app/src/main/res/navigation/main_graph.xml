@@ -44,6 +44,7 @@
         <action
             android:id="@+id/action_categoriesFragment_to_mealFragment2"
             app:destination="@id/mealFragment" />
+
     </fragment>
 
 </navigation>
