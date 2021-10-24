@@ -7,60 +7,55 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray_bg">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parentSearch"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            app:layout_constraintBottom_toTopOf="@id/rcMeals"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="NotSibling">
-
-            <com.google.android.material.card.MaterialCardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/cardSearch"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="12dp"
-                android:focusable="true"
-                android:shadowColor="@color/stroke_color"
-                app:strokeColor="@color/stroke_color"
-                app:strokeWidth="1dp"
-                card_view:cardCornerRadius="15dp"
-                card_view:cardElevation="3dp"
-                tools:ignore="MissingConstraints">
+            app:layout_constraintBottom_toTopOf="@id/svMeal"
+            android:text="Home"
+            android:textSize="30dp"
+            android:layout_marginLeft="25dp"
+            android:paddingTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/blue_gray_oishii"
+            />
 
                 <SearchView
                     android:id="@+id/svMeal"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
                     android:iconifiedByDefault="false"
+                    android:background="@drawable/bg_search"
                     android:inputType="textFilter"
                     android:queryHint="@string/text_query_hint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:showAsAction="always|collapseActionView" />
-            </com.google.android.material.card.MaterialCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:showAsAction="always|collapseActionView"
+                    app:queryBackground="@drawable/bg_search"
+                    android:queryBackground="@android:color/transparent"
+                    android:clickable="true"
+                    android:elevation="3dp"/>
+
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swRefresh"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/parentSearch">
+            app:layout_constraintTop_toBottomOf="@id/svMeal">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcMeals"

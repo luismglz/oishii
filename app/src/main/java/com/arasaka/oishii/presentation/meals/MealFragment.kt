@@ -89,7 +89,9 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
     override fun setBinding(view: View) {
         binding = MealFragmentBinding.bind(view)
         binding.lifecycleOwner = this
+        binding.svMeal.setBackgroundResource(R.drawable.bg_search);
         binding.svMeal.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
 
             //ENTER BUTTON IN KEYBOARD (submit search)
             override fun onQueryTextSubmit(query: String?): Boolean {

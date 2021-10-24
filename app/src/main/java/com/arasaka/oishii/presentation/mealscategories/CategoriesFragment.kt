@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -58,12 +60,8 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val searchInput: SearchView = requireView().findViewById(R.id.svCocktail)
-
-        /*val btnChangeView: FloatingActionButton =
-            requireView().findViewById(R.id.floatingViewChange)*/
-
         val rv: RecyclerView = requireView().findViewById(R.id.rcMealsCategories)
+
 
     }
 

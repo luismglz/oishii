@@ -7,53 +7,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient">
 
-        <!--
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parentSearch"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:paddingTop="7dp"
+
+        <TextView
+            android:id="@+id/txvCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rcMeals"
-            tools:ignore="NotSibling">
-
-            <com.google.android.material.card.MaterialCardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/cardSearch"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="10dp"
-                android:focusable="true"
-                android:shadowColor="@color/stroke_color"
-                app:strokeColor="@color/stroke_color"
-                app:strokeWidth="1dp"
-                card_view:cardCornerRadius="15dp"
-                card_view:cardElevation="3dp"
-                tools:ignore="MissingConstraints">
-
-                <SearchView
-                    android:id="@+id/svMeal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:iconifiedByDefault="false"
-                    android:queryHint="@string/text_query_hint"
-                    android:inputType="textFilter"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:showAsAction="always|collapseActionView" />
-            </com.google.android.material.card.MaterialCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        -->
-
-
+            android:text="Categories"
+            android:textSize="25dp"
+            android:layout_marginLeft="25dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="8dp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="@color/blue_gray_oishii"
+            tools:ignore="MissingConstraints" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swRefresh"
@@ -62,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/txvCategories">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcMealsCategories"
