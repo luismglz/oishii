@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arasaka.oishii.R
 import com.arasaka.oishii.core.extension.failure
 import com.arasaka.oishii.core.extension.observe
@@ -38,6 +40,11 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 @WithFragmentBindings
 @AndroidEntryPoint
 class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
+    companion object {
+        fun newInstance(): CategoriesFragment {
+            return CategoriesFragment()
+        }
+    }
 
     private lateinit var binding: CategoriesFragmentBinding
     private val adapter: CategoryAdapter by lazy { CategoryAdapter() }
@@ -47,21 +54,33 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         categoriesViewModel.apply {
             observe(state, ::onViewStateChanged)//Observe when livedata is modified
             failure(failure, ::handleFailure)
 
             doGetCategories("")
+
         }
+
+
+
     }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val rv: RecyclerView = requireView().findViewById(R.id.rcMealsCategories)
+        refreshCategories()
 
+    }
+
+    private fun refreshCategories(){
+        val sw : SwipeRefreshLayout = requireView().findViewById(R.id.swRefresh)
+        sw.setOnRefreshListener {
+            categoriesViewModel.doGetCategories("")
+            sw.isRefreshing = false;
+        }
 
     }
 
@@ -70,15 +89,31 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
         when (state) {
             is CategoriesViewState.CategoriesReceived -> setUpAdapter(state.categories)
         }
+
     }
 
     private fun setUpAdapter(categories: List<Category>) {
+        /*if (navController.currentDestination?.id == R.id.categoriesFragment) {
+            binding.rcMealsCategories.apply {
+
+                isVisible = categories.isNotEmpty()
+                adapter = this@CategoriesFragment.adapter
+            }
+        }*/
+
+        if(binding.emptyView.isVisible){
+
+            Toast.makeText(context, R.string.swipe_refresh,Toast.LENGTH_LONG)
+        }
+
         binding.emptyView.isVisible = categories.isEmpty()
+        refreshCategories()
         adapter.addData(categories);
         adapter.listener = {
-            navController.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToMealFragment2())
+            navController.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToMealCategoryFragment(it))
 
         }
+
 
 
         binding.rcMealsCategories.apply {

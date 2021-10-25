@@ -5,6 +5,8 @@
     <string name="text_account">Account</string>
     <string name="failure_response">Oops\nError making call with server</string>
     <string name="text_query_hint">Search for food... 🍔</string>
-    <string name="no_information">Oops!\nThere is no information</string>
+    <string name="no_data_available">No Data Available</string>
+    <string name="opps">Oops!</string>
+    <string name="swipe_refresh">Pull down to refresh</string>
     <string name="text_categories">Categories</string>
 </resources>

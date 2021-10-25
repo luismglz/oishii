@@ -42,9 +42,25 @@
         android:label="categories_fragment"
         tools:layout="@layout/categories_fragment">
         <action
-            android:id="@+id/action_categoriesFragment_to_mealFragment2"
-            app:destination="@id/mealFragment" />
+            android:id="@+id/action_categoriesFragment_to_mealCategoryFragment"
+            app:destination="@id/mealCategoryFragment" />
 
+        <argument
+            android:name="category"
+            app:argType="com.arasaka.oishii.domain.model.Category" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealCategoryFragment"
+        android:name="com.arasaka.oishii.presentation.meals.MealCategoryFragment"
+        android:label="meal_category_fragment"
+        tools:layout="@layout/meal_category_fragment" >
+        <action
+            android:id="@+id/action_mealCategoryFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+
+        <argument
+            android:name="category"
+            app:argType="com.arasaka.oishii.domain.model.Category" />
     </fragment>
 
 </navigation>

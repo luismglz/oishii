@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.meals.MealFragment">
 
+    <data>
+        <variable
+            name="category"
+            type="com.arasaka.oishii.domain.model.Category" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,13 +16,15 @@
         android:background="@color/gray_bg">
 
         <TextView
+            android:id="@+id/txtCategoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/svMeal"
-            android:text="Home"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{category.nameCategory}"
             android:textSize="25dp"
             android:layout_marginLeft="25dp"
+            android:hint="Category"
             android:paddingTop="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif"
@@ -25,26 +32,27 @@
             android:textColor="@color/blue_gray_oishii"
             />
 
-                <SearchView
-                    android:id="@+id/svMeal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:iconifiedByDefault="false"
-                    android:background="@drawable/bg_search"
-                    android:inputType="textFilter"
-                    android:queryHint="@string/text_query_hint"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:showAsAction="always|collapseActionView"
-                    app:queryBackground="@drawable/bg_search"
-                    android:queryBackground="@android:color/transparent"
-                    android:clickable="true"
-                    android:elevation="3dp"/>
-
+        <!--
+        <SearchView
+            android:id="@+id/svMeal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:iconifiedByDefault="false"
+            android:background="@drawable/bg_search"
+            android:inputType="textFilter"
+            android:queryHint="@string/text_query_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showAsAction="always|collapseActionView"
+            app:queryBackground="@drawable/bg_search"
+            android:queryBackground="@android:color/transparent"
+            android:clickable="true"
+            android:elevation="3dp"/>
+-->
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -55,7 +63,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/svMeal">
+            app:layout_constraintTop_toBottomOf="@id/txtCategoryName">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcMeals"
