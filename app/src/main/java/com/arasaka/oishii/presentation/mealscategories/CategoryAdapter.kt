@@ -19,7 +19,7 @@ interface Listener{
 @SuppressLint("NotifyDataSetChanged")
 class CategoryAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    //Cocktails list initializes empty
+
     private var list: MutableList<Category> = mutableListOf()
     var layoutType = LayoutType.LINEAR
 
@@ -27,7 +27,7 @@ class CategoryAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addData(list: List<Category>) {
         this.list = list.toMutableList()
-        notifyDataSetChanged(); //to say that something changes in the list and show in row info
+        notifyDataSetChanged();
     }
 
     fun changeView(layoutType: LayoutType) {
@@ -54,22 +54,20 @@ class CategoryAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    //bind information to rows, with respect to datacollection response
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         (holder as BaseViewHolder).bind(
             list[position],listener
         )
 
-    //this is to know how many items are in recyclerview
+
     override fun getItemCount() = list.size
 }
 
 class ViewHolderItem(private val binding: RowCategoriesBinding) :
     BaseViewHolder(binding.root){
-    //this meal type object will be binded in recycleview
     override fun bind(data: Category, listener: (category: Category) -> Unit){
-        // binding.txvName.text
-        binding.item = data// 'item' was created in layout row
+        binding.item = data
         binding.root.setOnClickListener {
             listener(data)
         }
@@ -78,10 +76,7 @@ class ViewHolderItem(private val binding: RowCategoriesBinding) :
 
 class ViewHolderGridItem(private val binding: GridCategoriesBinding) :
     BaseViewHolder(binding.root) {
-    //this cocktail type object will be binded in recycleview
     override fun bind(data: Category, listener: (category: Category) -> Unit){
-        // binding.txvName.text
-        binding.item = data// 'item' was created in layout row
         binding.root.setOnClickListener {
             listener(data)
         }

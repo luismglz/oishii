@@ -31,16 +31,15 @@ class RandomFragment :  BaseFragment(R.layout.meals_random_fragment) {
     private lateinit var binding: MealFragmentBinding
     private val adapter: MealAdapter by lazy { MealAdapter() }
     private var gridLayoutManager: GridLayoutManager?=null
-    private val randomViewModel by viewModels<RandomViewModel>(); //view model injection
+    private val randomViewModel by viewModels<RandomViewModel>();
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         randomViewModel.apply {
-            observe(state, ::onViewStateChanged)//Observe when livedata is modified
+            observe(state, ::onViewStateChanged)
             failure(failure, ::handleFailure)
-
             getMealsRandom()
         }
     }
@@ -48,9 +47,6 @@ class RandomFragment :  BaseFragment(R.layout.meals_random_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //val searchInput: SearchView = requireView().findViewById(R.id.svCocktail)
-
         val btnChangeView: FloatingActionButton =
             requireView().findViewById(R.id.floatingViewChange)
 

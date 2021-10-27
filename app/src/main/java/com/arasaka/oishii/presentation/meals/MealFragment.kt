@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arasaka.oishii.R
 import com.arasaka.oishii.core.extension.failure
 import com.arasaka.oishii.core.extension.observe
@@ -58,6 +59,15 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
             requireView().findViewById(R.id.floatingViewChange)
 
         val rv: RecyclerView = requireView().findViewById(R.id.rcMeals)
+        refreshMeals()
+    }
+
+    private fun refreshMeals(){
+        val sw : SwipeRefreshLayout = requireView().findViewById(R.id.swRefresh)
+        sw.setOnRefreshListener {
+            mealViewModel.doGetMealsByName("")
+            sw.isRefreshing = false;
+        }
 
     }
 

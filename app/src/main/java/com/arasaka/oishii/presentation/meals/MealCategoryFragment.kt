@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arasaka.oishii.R
 import com.arasaka.oishii.core.extension.failure
 import com.arasaka.oishii.core.extension.observe
@@ -33,103 +34,100 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 @WithFragmentBindings
 @AndroidEntryPoint
 class MealCategoryFragment : BaseFragment(R.layout.meal_category_fragment) {
-        private lateinit var binding: MealCategoryFragmentBinding
-       // private val cate: new Category
-       private val args: MealCategoryFragmentArgs by navArgs()
+    private lateinit var binding: MealCategoryFragmentBinding
 
-    private val adapter: MealAdapter by lazy {MealAdapter()}
-        private var gridLayoutManager: GridLayoutManager?=null
+    // private val cate: new Category
+    private val args: MealCategoryFragmentArgs by navArgs()
 
-        private val mealCategoryViewModel by viewModels<MealCategoryViewModel>(); //view model injection
+    private val adapter: MealAdapter by lazy { MealAdapter() }
+    private var gridLayoutManager: GridLayoutManager? = null
+
+    private val mealCategoryViewModel by viewModels<MealCategoryViewModel>(); //view model injection
 
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-            mealCategoryViewModel.apply {
-                observe(state, ::onViewStateChanged)//Observe when livedata is modified
-                failure(failure, ::handleFailure)
+        mealCategoryViewModel.apply {
+            observe(state, ::onViewStateChanged)//Observe when livedata is modified
+            failure(failure, ::handleFailure)
 
-                doGetMealsByCategories(args.category.nameCategory)
-            }
+            doGetMealsByCategories(args.category.nameCategory)
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btnChangeView: FloatingActionButton =
+            requireView().findViewById(R.id.floatingViewChange)
+
+        val rv: RecyclerView = requireView().findViewById(R.id.rcMeals)
+        refreshMealsByCategory()
+
+    }
+
+    private fun refreshMealsByCategory() {
+        val sw: SwipeRefreshLayout = requireView().findViewById(R.id.swRefresh)
+        sw.setOnRefreshListener {
+            mealCategoryViewModel.doGetMealsByCategories(args.category.nameCategory)
+            sw.isRefreshing = false;
+        }
+
+    }
+
+    override fun onViewStateChanged(state: BaseViewState?) {
+        super.onViewStateChanged(state)
+        when (state) {
+            is MealViewState.MealsReceived -> setUpAdapter(state.meals)
+            else -> mealCategoryViewModel.doGetMealsByCategories(args.category.nameCategory)
+        }
+    }
+
+    private fun setUpAdapter(meals: List<Meal>) {
+        binding.emptyView.isVisible = meals.isEmpty()
+        binding.rcMeals.setHasFixedSize(true)
+        adapter.addData(meals);
+        adapter.listener = {
+            navController.navigate(
+                MealCategoryFragmentDirections.actionMealCategoryFragmentToMealDetailFragment(
+                    it
+                )
+            )
         }
 
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
+        binding.rcMeals.apply {
 
-            //val searchInput: SearchView = requireView().findViewById(R.id.svCocktail)
-
-            val btnChangeView: FloatingActionButton =
-                requireView().findViewById(R.id.floatingViewChange)
-
-            val rv: RecyclerView = requireView().findViewById(R.id.rcMeals)
+            isVisible = meals.isNotEmpty()
+            refreshMealsByCategory()
+            adapter = this@MealCategoryFragment.adapter
 
         }
 
-        override fun onViewStateChanged(state: BaseViewState?) {
-            super.onViewStateChanged(state)
-            when (state) {
-                is MealViewState.MealsReceived -> setUpAdapter(state.meals)
+    }
+
+
+    override fun setBinding(view: View) {
+        binding = MealCategoryFragmentBinding.bind(view)
+        binding.lifecycleOwner = this
+        binding.floatingViewChange.setOnClickListener {
+            val newLayout = if (adapter.layoutType == LayoutType.LINEAR) {
+                binding.rcMeals.layoutManager = GridLayoutManager(requireContext(), 3);
+                LayoutType.GRID
+
+            } else {
+                binding.rcMeals.layoutManager = LinearLayoutManager(requireContext());
+                LayoutType.LINEAR
             }
+            adapter.changeView(newLayout)
         }
 
-        private fun setUpAdapter(meals: List<Meal>) {
-            binding.emptyView.isVisible = meals.isEmpty()
-            adapter.addData(meals);
-            adapter.listener = {
-               // navController.navigate(MealFragmentCategoryDirections.actionMealFragmentToMealDetailFragment(it))
-                navController.navigate(MealCategoryFragmentDirections.actionMealCategoryFragmentToMealDetailFragment(it))
-            }
-
-
-            binding.rcMeals.apply {
-
-                isVisible = meals.isNotEmpty()
-                adapter = this@MealCategoryFragment.adapter
-            }
-
+        binding.apply {
+            lifecycleOwner = this@MealCategoryFragment
+            category = args.category
         }
-
-
-        override fun setBinding(view: View) {
-            binding = MealCategoryFragmentBinding.bind(view)
-            binding.lifecycleOwner = this
-            /*binding.svMeal.setBackgroundResource(R.drawable.bg_search);
-            binding.svMeal.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-
-                //ENTER BUTTON IN KEYBOARD (submit search)
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(query: String?): Boolean {
-                    if (query != null) {
-                        binding.rcMeals.scrollToPosition(0)
-                        mealCategoryViewModel.doGetMealsByCategories(query.lowercase()?:"")
-                        //searchInput.clearFocus() ->Hide keyboard at type key...
-                    }
-                    return true
-                }
-            })*/
-
-            binding.floatingViewChange.setOnClickListener{
-                val newLayout = if(adapter.layoutType == LayoutType.LINEAR){
-                    binding.rcMeals.layoutManager = GridLayoutManager(requireContext(),3);
-                    LayoutType.GRID
-
-                }else{
-                    binding.rcMeals.layoutManager = LinearLayoutManager(requireContext());
-                    LayoutType.LINEAR
-                }
-                adapter.changeView(newLayout)
-            }
-
-            binding.apply {
-                lifecycleOwner = this@MealCategoryFragment
-                category = args.category
-            }
-        }
+    }
 
 }

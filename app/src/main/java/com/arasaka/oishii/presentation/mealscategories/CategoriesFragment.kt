@@ -62,10 +62,7 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
         }
 
-
-
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,25 +86,10 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
         when (state) {
             is CategoriesViewState.CategoriesReceived -> setUpAdapter(state.categories)
         }
-
     }
 
     private fun setUpAdapter(categories: List<Category>) {
-        /*if (navController.currentDestination?.id == R.id.categoriesFragment) {
-            binding.rcMealsCategories.apply {
-
-                isVisible = categories.isNotEmpty()
-                adapter = this@CategoriesFragment.adapter
-            }
-        }*/
-
-        if(binding.emptyView.isVisible){
-
-            Toast.makeText(context, R.string.swipe_refresh,Toast.LENGTH_LONG)
-        }
-
         binding.emptyView.isVisible = categories.isEmpty()
-        refreshCategories()
         adapter.addData(categories);
         adapter.listener = {
             navController.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToMealCategoryFragment(it))
@@ -131,7 +113,7 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
         binding.floatingViewChange.setOnClickListener{
             val newLayout = if(adapter.layoutType == LayoutType.LINEAR){
-                binding.rcMealsCategories.layoutManager = GridLayoutManager(requireContext(),3);
+                binding.rcMealsCategories.layoutManager = GridLayoutManager(requireContext(),2);
                 LayoutType.GRID
 
             }else{

@@ -21,36 +21,41 @@
         app:strokeColor="@color/stroke_color"
         app:strokeWidth="0dp"
         card_view:cardCornerRadius="12dp"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/salmon_oishii">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="150dp">
 
             <ImageView
                 android:id="@+id/imgCategory"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:loadFromURL="@{item.urlThumbCategory}"
-                tools:src="@tools:sample/avatars" />
+                android:layout_marginLeft="-250dp"
+                tools:src="@tools:sample/avatars"
+                android:elevation="3dp"
+                 />
 
             <TextView
                 android:id="@+id/txvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="16dp"
                 android:text="@{item.nameCategory}"
-                android:textSize="20dp"
-                android:textStyle="normal"
-                android:textColor="@color/blue_gray_oishii"
-                app:layout_constraintStart_toEndOf="@id/imgCategory"
-                app:layout_constraintTop_toTopOf="@id/imgCategory"
-                app:layout_constraintBottom_toBottomOf="@id/imgCategory"
-                tools:text="Category" />
+                android:textSize="19dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black_blue"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                tools:text="Category"
+                android:layout_marginLeft="190dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
