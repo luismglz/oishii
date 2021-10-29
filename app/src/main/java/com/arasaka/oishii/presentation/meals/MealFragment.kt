@@ -60,6 +60,8 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
 
         val rv: RecyclerView = requireView().findViewById(R.id.rcMeals)
         refreshMeals()
+        adapter.changeView(LayoutType.LINEAR);
+        mealViewModel.doGetMealsByName("")
     }
 
     private fun refreshMeals(){
@@ -120,7 +122,7 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
 
         binding.floatingViewChange.setOnClickListener{
             val newLayout = if(adapter.layoutType == LayoutType.LINEAR){
-                binding.rcMeals.layoutManager = GridLayoutManager(requireContext(),3);
+                binding.rcMeals.layoutManager = GridLayoutManager(requireContext(),2);
                 LayoutType.GRID
 
             }else{

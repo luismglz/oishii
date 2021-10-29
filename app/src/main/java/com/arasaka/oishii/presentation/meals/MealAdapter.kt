@@ -10,9 +10,12 @@ import com.arasaka.oishii.databinding.GridMealBinding
 import com.arasaka.oishii.databinding.RowMealBinding
 import com.arasaka.oishii.domain.model.Meal
 
+/*
 interface Listener{
     fun onClickRow(data: Meal)
 }
+
+ */
 
 //ViewHolders: Fill the View elements in UI
 @SuppressLint("NotifyDataSetChanged")
@@ -68,7 +71,7 @@ class ViewHolderItem(private val binding: RowMealBinding) :
     //this meal type object will be binded in recycleview
     override fun bind(data: Meal, listener: (meal:Meal) -> Unit){
         // binding.txvName.text
-        binding.item = data// 'item' was created in layout row
+        binding.meal = data// 'item' was created in layout row
         binding.root.setOnClickListener {
             listener(data)
         }
@@ -80,7 +83,7 @@ class ViewHolderGridItem(private val binding: GridMealBinding) :
     //this cocktail type object will be binded in recycleview
     override fun bind(data: Meal, listener: (meal:Meal) -> Unit){
         // binding.txvName.text
-        binding.item = data// 'item' was created in layout row
+        binding.meal = data// 'item' was created in layout row
         binding.root.setOnClickListener {
             listener(data)
         }

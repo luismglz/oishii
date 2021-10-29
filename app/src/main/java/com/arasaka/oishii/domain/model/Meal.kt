@@ -8,6 +8,7 @@ import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 
+
 @Parcelize
 @Entity
 @JsonClass(generateAdapter = true)

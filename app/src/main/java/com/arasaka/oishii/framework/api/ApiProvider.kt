@@ -27,7 +27,7 @@ class ApiProvider @Inject constructor() {
 
         retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.API_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create().asLenient())
+            .addConverterFactory(MoshiConverterFactory.create().asLenient().withNullSerialization())
             .client(httpClientBuilder.build())
             .build()
     }

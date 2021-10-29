@@ -66,7 +66,11 @@ class MealCategoryFragment : BaseFragment(R.layout.meal_category_fragment) {
         val rv: RecyclerView = requireView().findViewById(R.id.rcMeals)
         refreshMealsByCategory()
 
+        adapter.changeView(LayoutType.LINEAR);
+        mealCategoryViewModel.doGetMealsByCategories(args.category.nameCategory)
+
     }
+
 
     private fun refreshMealsByCategory() {
         val sw: SwipeRefreshLayout = requireView().findViewById(R.id.swRefresh)
@@ -77,11 +81,13 @@ class MealCategoryFragment : BaseFragment(R.layout.meal_category_fragment) {
 
     }
 
+
+
+
     override fun onViewStateChanged(state: BaseViewState?) {
         super.onViewStateChanged(state)
         when (state) {
             is MealViewState.MealsReceived -> setUpAdapter(state.meals)
-            else -> mealCategoryViewModel.doGetMealsByCategories(args.category.nameCategory)
         }
     }
 

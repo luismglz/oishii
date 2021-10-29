@@ -5,72 +5,94 @@
 
     <data>
         <variable
-            name="item"
+            name="meal"
             type="com.arasaka.oishii.domain.model.Meal" />
     </data>
+
 
     <com.google.android.material.card.MaterialCardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         app:strokeColor="@color/stroke_color"
-        app:strokeWidth="1dp"
-        card_view:cardCornerRadius="8dp">
+        app:strokeWidth="0dp"
+        card_view:cardCornerRadius="12dp"
+        android:elevation="2dp"
+        android:backgroundTint="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="135dp">
 
             <ImageView
                 android:id="@+id/imgMeal"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadFromURL="@{item.urlThumb}"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:loadFromURL="@{meal.urlThumb}"
+                android:layout_marginLeft="-230dp"
+                tools:src="@tools:sample/avatars"
+                android:elevation="3dp"
+                />
 
             <TextView
                 android:id="@+id/txvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="@{item.name}"
+                android:text="@{meal.name}"
                 android:textSize="17dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/txvCategory"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black_blue"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imgMeal"
-                app:layout_constraintTop_toTopOf="@id/imgMeal"
-                tools:text="Beer" />
+                card_view:layout_constraintStart_toStartOf="parent"
+                tools:text="Meal"
+                android:maxLines = "2"
+                android:layout_marginLeft="155dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="90dp"/>
 
             <TextView
                 android:id="@+id/txvCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{item.category}"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="@id/txvName"
-                app:layout_constraintEnd_toEndOf="@id/txvName"
-                app:layout_constraintStart_toStartOf="@id/txvName"
-                app:layout_constraintTop_toBottomOf="@id/txvName"
-                tools:text="Category" />
-
-            <ImageView
-                android:id="@+id/imgFavorite"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_no_star"
+                android:text="@{meal.category}"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/gray"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/imgMeal" />
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="155dp"
+                android:layout_marginBottom="20dp"/>
 
+            <TextView
+                android:id="@+id/txvArea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{meal.area}"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/gray"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="155dp"
+                android:layout_marginTop="80dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

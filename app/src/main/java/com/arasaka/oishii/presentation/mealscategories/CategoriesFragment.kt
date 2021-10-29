@@ -10,8 +10,10 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,11 +42,13 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 @WithFragmentBindings
 @AndroidEntryPoint
 class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
-    companion object {
+   /* companion object {
         fun newInstance(): CategoriesFragment {
             return CategoriesFragment()
         }
     }
+
+    */
 
     private lateinit var binding: CategoriesFragmentBinding
     private val adapter: CategoryAdapter by lazy { CategoryAdapter() }
@@ -62,15 +66,20 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
         }
 
+        //categoriesViewModel.doGetCategories("")
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        baseActivity.setUpNavigation(findNavController());
+
         val rv: RecyclerView = requireView().findViewById(R.id.rcMealsCategories)
         refreshCategories()
-
+        adapter.changeView(LayoutType.LINEAR);
+        categoriesViewModel.doGetCategories("")
     }
+
 
     private fun refreshCategories(){
         val sw : SwipeRefreshLayout = requireView().findViewById(R.id.swRefresh)
@@ -81,8 +90,11 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
 
     }
 
+
+
     override fun onViewStateChanged(state: BaseViewState?) {
         super.onViewStateChanged(state)
+
         when (state) {
             is CategoriesViewState.CategoriesReceived -> setUpAdapter(state.categories)
         }
@@ -93,7 +105,6 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
         adapter.addData(categories);
         adapter.listener = {
             navController.navigate(CategoriesFragmentDirections.actionCategoriesFragmentToMealCategoryFragment(it))
-
         }
 
 
@@ -103,6 +114,10 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
             isVisible = categories.isNotEmpty()
             adapter = this@CategoriesFragment.adapter
         }
+
+
+
+
 
     }
 
@@ -122,6 +137,8 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
             }
             adapter.changeView(newLayout)
         }
+
+
     }
 
 }

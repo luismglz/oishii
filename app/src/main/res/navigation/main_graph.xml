@@ -44,10 +44,10 @@
         <action
             android:id="@+id/action_categoriesFragment_to_mealCategoryFragment"
             app:destination="@id/mealCategoryFragment" />
-
+<!--
         <argument
             android:name="category"
-            app:argType="com.arasaka.oishii.domain.model.Category" />
+            app:argType="com.arasaka.oishii.domain.model.Category" />-->
     </fragment>
     <fragment
         android:id="@+id/mealCategoryFragment"

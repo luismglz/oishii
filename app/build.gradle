@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
+    id('org.jetbrains.kotlin.kapt')
 }
 
 android {
@@ -75,9 +76,10 @@ dependencies {
 
 
     //Moshi
-    implementation 'com.squareup.moshi:moshi:1.12.0'
+    implementation ("com.squareup.moshi:moshi-kotlin:1.12.0")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.12.0'
+     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+
 
     //Hilt
     implementation 'com.google.dagger:hilt-android:2.38.1'

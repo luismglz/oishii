@@ -30,6 +30,7 @@ class MealRepositoryImpl @Inject constructor(
             MealsResponse(emptyList())
         ) //Api result
 
+        print(result)
         //If there is an error do this
         return if (result.isLeft) {
             val localResult = mealDao.getMealsByName("%$name%")

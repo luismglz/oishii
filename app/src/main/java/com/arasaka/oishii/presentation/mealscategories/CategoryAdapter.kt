@@ -77,6 +77,7 @@ class ViewHolderItem(private val binding: RowCategoriesBinding) :
 class ViewHolderGridItem(private val binding: GridCategoriesBinding) :
     BaseViewHolder(binding.root) {
     override fun bind(data: Category, listener: (category: Category) -> Unit){
+        binding.item = data
         binding.root.setOnClickListener {
             listener(data)
         }
