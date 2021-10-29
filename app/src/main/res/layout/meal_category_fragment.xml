@@ -32,28 +32,6 @@
             android:textColor="@color/blue_gray_oishii"
             />
 
-        <!--
-        <SearchView
-            android:id="@+id/svMeal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:iconifiedByDefault="false"
-            android:background="@drawable/bg_search"
-            android:inputType="textFilter"
-            android:queryHint="@string/text_query_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showAsAction="always|collapseActionView"
-            app:queryBackground="@drawable/bg_search"
-            android:queryBackground="@android:color/transparent"
-            android:clickable="true"
-            android:elevation="3dp"/>
--->
-
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swRefresh"
@@ -85,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="65dp"
-            android:backgroundTint="@color/yellow_oishii"
+            app:backgroundTint="@color/salmon_oishii"
             android:src="@drawable/ic_grid"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

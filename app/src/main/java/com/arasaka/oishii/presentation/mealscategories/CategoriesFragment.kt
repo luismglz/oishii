@@ -135,6 +135,15 @@ class CategoriesFragment : BaseFragment(R.layout.categories_fragment) {
                 binding.rcMealsCategories.layoutManager = LinearLayoutManager(requireContext());
                 LayoutType.LINEAR
             }
+
+
+            if (adapter.layoutType == LayoutType.LINEAR){
+                binding.floatingViewChange.setImageResource(R.drawable.ic_row);
+            }else{
+
+                binding.floatingViewChange.setImageResource(R.drawable.ic_grid);
+            }
+
             adapter.changeView(newLayout)
         }
 

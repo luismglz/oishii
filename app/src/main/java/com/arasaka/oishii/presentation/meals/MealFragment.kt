@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.airbnb.lottie.LottieAnimationView
 import com.arasaka.oishii.R
 import com.arasaka.oishii.core.extension.failure
 import com.arasaka.oishii.core.extension.observe
 import com.arasaka.oishii.core.utils.LayoutType
 import com.arasaka.oishii.databinding.MealFragmentBinding
+import com.arasaka.oishii.databinding.RowMealBinding
 import com.arasaka.oishii.domain.model.Meal
 import com.arasaka.oishii.presentation.BaseFragment
 import com.arasaka.oishii.presentation.BaseViewState
@@ -32,14 +34,16 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 class MealFragment : BaseFragment(R.layout.meal_fragment) {
 
     private lateinit var binding: MealFragmentBinding
+    private lateinit var bindingRow: RowMealBinding
     private val adapter: MealAdapter by lazy {MealAdapter()}
     private var gridLayoutManager: GridLayoutManager?=null
 
-    private val mealViewModel by viewModels<MealViewModel>(); //view model injection
 
+    private val mealViewModel by viewModels<MealViewModel>(); //view model injection
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         mealViewModel.apply {
             observe(state, ::onViewStateChanged)//Observe when livedata is modified
@@ -47,6 +51,16 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
 
             doGetMealsByName("")
         }
+
+        val inflatedView : View = layoutInflater.inflate(R.layout.row_meal, null);
+        val imgLike: LottieAnimationView = inflatedView.findViewById(R.id.imgLike);
+
+
+        var isLike = false
+        imgLike.setOnClickListener{
+            isLike = likeAnimation(imgLike, R.raw.like_burst, isLike)
+        }
+
     }
 
 
@@ -55,6 +69,7 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
 
         //val searchInput: SearchView = requireView().findViewById(R.id.svCocktail)
 
+
         val btnChangeView: FloatingActionButton =
             requireView().findViewById(R.id.floatingViewChange)
 
@@ -62,6 +77,8 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
         refreshMeals()
         adapter.changeView(LayoutType.LINEAR);
         mealViewModel.doGetMealsByName("")
+
+
     }
 
     private fun refreshMeals(){
@@ -71,6 +88,19 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
             sw.isRefreshing = false;
         }
 
+    }
+
+    private fun likeAnimation(imageLike: LottieAnimationView, animation: Int, isLike:Boolean):Boolean{
+
+        if(!isLike){
+            imageLike.setAnimation(animation)
+            imageLike.playAnimation()
+        }else{
+            imageLike.setImageResource(R.drawable.ic_like)
+
+        }
+
+        return !isLike
     }
 
     override fun onViewStateChanged(state: BaseViewState?) {
@@ -95,11 +125,16 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
             adapter = this@MealFragment.adapter
         }
 
+
+
     }
 
 
     override fun setBinding(view: View) {
         binding = MealFragmentBinding.bind(view)
+
+
+        //val imgLike: LottieAnimationView = requireView().findViewById(R.id.imgLike)
         binding.lifecycleOwner = this
         binding.svMeal.setBackgroundResource(R.drawable.bg_search);
         binding.svMeal.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -124,13 +159,28 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
             val newLayout = if(adapter.layoutType == LayoutType.LINEAR){
                 binding.rcMeals.layoutManager = GridLayoutManager(requireContext(),2);
                 LayoutType.GRID
+               // binding.floatingViewChange.setImageResource(R.drawable.ic_row);
 
             }else{
                 binding.rcMeals.layoutManager = LinearLayoutManager(requireContext());
                 LayoutType.LINEAR
+                //binding.floatingViewChange.setImageResource(R.drawable.ic_grid);
             }
+
+            if (adapter.layoutType == LayoutType.LINEAR){
+                binding.floatingViewChange.setImageResource(R.drawable.ic_row);
+            }else{
+
+                binding.floatingViewChange.setImageResource(R.drawable.ic_grid);
+            }
+
             adapter.changeView(newLayout)
         }
+
+
+
+
+
     }
 
 }

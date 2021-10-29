@@ -95,6 +95,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/imgLike"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    card_view:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_like"/>
+
                 <ImageView
                     android:id="@+id/imgCategory"
                     android:layout_width="200dp"
@@ -113,11 +122,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="20dp"
                     android:text="@{meal.name}"
                     android:ellipsize="end"
                     android:lines="2"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     android:fontFamily="@font/roboto_regular"
                     card_view:layout_constraintBottom_toTopOf="@id/imgCategory"
                     card_view:layout_constraintStart_toStartOf="@id/imgCategory"

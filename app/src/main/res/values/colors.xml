@@ -14,6 +14,7 @@
     <color name="blue_gray_oishii">#262D2F</color>
     <color name="gray_transparent">#8B000000</color>
     <color name="gray_bg">#FCFAF9</color>
+    <color name="gray_bg_strong">#E6E9EF</color>
     <color name="gray">#808080</color>
     <color name="black_blue">#10181a</color>
 </resources>

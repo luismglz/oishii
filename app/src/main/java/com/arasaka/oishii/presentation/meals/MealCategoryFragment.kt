@@ -120,7 +120,7 @@ class MealCategoryFragment : BaseFragment(R.layout.meal_category_fragment) {
         binding.lifecycleOwner = this
         binding.floatingViewChange.setOnClickListener {
             val newLayout = if (adapter.layoutType == LayoutType.LINEAR) {
-                binding.rcMeals.layoutManager = GridLayoutManager(requireContext(), 3);
+                binding.rcMeals.layoutManager = GridLayoutManager(requireContext(), 2);
                 LayoutType.GRID
 
             } else {

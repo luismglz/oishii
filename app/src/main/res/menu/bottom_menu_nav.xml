@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/mealFragment"
         android:icon="@drawable/ic_noodles"
         android:orderInCategory="1"
-        android:title="@string/text_meals"
-        app:showAsAction="always"/>
+        android:title=""
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/categoriesFragment"
         android:icon="@drawable/ic_category"
         android:orderInCategory="2"
-        android:title="@string/text_categories"
-        app:showAsAction="always"/>
+        android:title=""
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/accountFragment"
         android:icon="@drawable/ic_account"
         android:orderInCategory="3"
-        android:title="@string/text_account"
-        app:showAsAction="always"/>
+        android:title=""
 
+        app:showAsAction="always" />
 
+    <!--android:title="@string/text_account"
+
+    android:title="@string/text_meals"
+    android:title="@string/text_categories"-->
 
 </menu>

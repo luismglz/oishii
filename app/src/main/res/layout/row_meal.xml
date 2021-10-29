@@ -28,6 +28,16 @@
             android:layout_width="match_parent"
             android:layout_height="135dp">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/imgLike"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="15dp"
+                android:src="@drawable/ic_like"/>
+
+
             <ImageView
                 android:id="@+id/imgMeal"
                 android:layout_width="170dp"

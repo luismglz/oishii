@@ -56,7 +56,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="65dp"
             android:src="@drawable/ic_grid"
-            android:backgroundTint="@color/yellow_oishii"
+            app:rippleColor="@color/white_oishii"
+            app:backgroundTint="@color/white_oishii"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

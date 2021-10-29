@@ -65,7 +65,6 @@
                 android:paddingBottom="?attr/actionBarSize"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
                 tools:itemCount="10"
                 tools:listitem="@layout/row_meal" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -77,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="65dp"
-            android:backgroundTint="@color/yellow_oishii"
+            app:backgroundTint="@color/salmon_oishii"
+            app:itemRippleColor="@color/yellow_oishii"
             android:src="@drawable/ic_grid"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
