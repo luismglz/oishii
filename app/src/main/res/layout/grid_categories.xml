@@ -16,6 +16,7 @@
         android:layout_margin="10dp"
         app:strokeColor="@color/stroke_color"
         app:strokeWidth="0dp"
+        card_view:rippleColor="@color/white_oishii"
         card_view:cardCornerRadius="12dp"
         android:backgroundTint="@color/salmon_oishii">
 

@@ -12,7 +12,9 @@
         tools:layout="@layout/meal_fragment">
         <action
             android:id="@+id/action_mealFragment_to_mealDetailFragment"
-            app:destination="@id/mealDetailFragment" />
+            app:destination="@id/mealDetailFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out" />
     </fragment>
 
     <fragment
@@ -43,7 +45,9 @@
         tools:layout="@layout/categories_fragment">
         <action
             android:id="@+id/action_categoriesFragment_to_mealCategoryFragment"
-            app:destination="@id/mealCategoryFragment" />
+            app:destination="@id/mealCategoryFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out" />
 <!--
         <argument
             android:name="category"
@@ -56,7 +60,9 @@
         tools:layout="@layout/meal_category_fragment" >
         <action
             android:id="@+id/action_mealCategoryFragment_to_mealDetailFragment"
-            app:destination="@id/mealDetailFragment" />
+            app:destination="@id/mealDetailFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out" />
 
         <argument
             android:name="category"

@@ -22,7 +22,8 @@
         app:strokeWidth="0dp"
         card_view:cardCornerRadius="12dp"
         android:elevation="2dp"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        card_view:rippleColor="@color/yellow_oishii">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
